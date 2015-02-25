@@ -1,0 +1,22 @@
+{
+    "name": "schnitzler/extbase_language_tests_base",
+    "description": "Base package to run extbase_language_tests",
+    "require": {
+        "schnitzler/extbase_language_tests": "dev-develop"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.4",
+        "typo3/cms": "6.2.9"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Alexander Schnitzler",
+            "email": "git@alexanderschnitzler.de"
+        }
+    ],
+    "minimum-stability": "dev"
+}

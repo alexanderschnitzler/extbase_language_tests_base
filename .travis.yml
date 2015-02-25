@@ -1,0 +1,29 @@
+language: php
+
+php:
+  - 5.5
+  - 5.6
+
+env:
+  - TYPO3_VERSION="6.2.*" DB=mysql
+  - TYPO3_VERSION="7.0.*" DB=mysql
+  - TYPO3_VERSION="7.1.*" DB=mysql
+  - TYPO3_VERSION="dev-master" DB=mysql
+
+install:
+  - composer self-update
+  - composer require --dev --ignore-platform-reqs "typo3/cms" "$TYPO3_VERSION"
+
+before_script:
+  - mkdir -p uploads typo3temp typo3conf/ext
+  - mv vendor/schnitzler/extbase_language_tests typo3conf/ext/extbase_language_tests
+
+script:
+  - >
+    echo;
+    echo "Running functional tests";
+    export typo3DatabaseName="typo3";
+    export typo3DatabaseHost="localhost";
+    export typo3DatabaseUsername="root";
+    export typo3DatabasePassword="";
+    ./bin/phpunit --colors --process-isolation --bootstrap ./typo3/sysext/core/Build/FunctionalTestsBootstrap.php -c ./typo3conf/ext/extbase_language_tests/Build/FunctionalTests.xml
